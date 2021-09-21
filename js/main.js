@@ -1,5 +1,8 @@
-import KanbanAPI from "./api/KanbanAPI.js";
+// import KanbanAPI from "./api/KanbanAPI.js";
 
+import Kanban from "./view/Kanban.js";
+
+// TEST ADD ITEM
 // console.log(KanbanAPI.insertItem(2, "Prahlad Inala"))
 
 // TEST UPDATE ITEM
@@ -14,3 +17,7 @@ import KanbanAPI from "./api/KanbanAPI.js";
 
 // TEST DELETE ITEM
 // KanbanAPI.deleteItem(64537);
+
+new Kanban(
+    document.querySelector(".kanban")
+);
