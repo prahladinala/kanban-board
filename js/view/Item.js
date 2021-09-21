@@ -1,7 +1,10 @@
 import KanbanAPI from "../api/KanbanAPI.js";
+import DropZone from "./DropZone.js";
 
 export default class Item {
     constructor(id, content) {
+
+        const bottomDropZone = DropZone.createDropZone();
 
         this.elements = {};
         this.elements.root = Item.createRoot();
@@ -12,6 +15,8 @@ export default class Item {
 
         // UPDATE WHEN USER CHANGES THE INPUT
         this.content = content;
+
+        this.elements.root.appendChild(bottomDropZone);
 
         // UPDATE CONTENT OF SINGLE CONTENT
         const onBlur = () => {
@@ -43,6 +48,15 @@ export default class Item {
 
                 this.elements.root.parentElement.removeChild(this.elements.root)
             }
+        });
+
+        // DRAG AND DROP EVENT LISTENER
+        this.elements.root.addEventListener("dragstart", e => {
+            e.dataTransfer.setData("text/plain", id);
+        })
+        // AVOID DROP OVER THE OTHER INPUT
+        this.elements.input.addEventListener("drop", e => {
+            e.preventDefault();
         })
     }
     static createRoot() {

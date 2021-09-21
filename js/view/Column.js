@@ -1,8 +1,12 @@
 import KanbanAPI from "../api/KanbanAPI.js";
 import Item from "../view/Item.js";
+import DropZone from "./DropZone.js";
 
 export default class Column {
     constructor(id, title) {
+        // ADDING DROPZONE ON TOP OF COLUMN TO DROP ON TOP AS WELL
+        const topDropZone = DropZone.createDropZone();
+
         // GIVES THE SINGLE COLUMN IN USER INTERFACE
         this.elements = {};
         this.elements.root = Column.createRoot();
@@ -12,6 +16,8 @@ export default class Column {
 
         this.elements.root.dataset.id = id;
         this.elements.title.textContent = title;
+        // ADDING DROPZONE ON TOP OF COLUMN TO DROP ON TOP AS WELL
+        this.elements.items.appendChild(topDropZone);
 
         this.elements.addItem.addEventListener("click", () => {
             // ADD ITEM
